@@ -1,0 +1,84 @@
+type StockBucketStockUniverse @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  stockUniverseID: String!
+  stockBucketID: String!
+  stockbucketID: ID! @index(name: "byStockBucket")
+  stockuniverseID: ID! @index(name: "byStockUniverse")
+  StockUniverse: StockUniverse @belongsTo(fields: ["stockuniverseID"])
+  StockBucket: StockBucket @belongsTo(fields: ["stockbucketID"])
+}
+
+type StockUniverse @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  bse_code: String
+  nse_code: String
+  industry: String
+  current_price: String
+  price_to_earning: String
+  industry_pe: String
+  eps: String
+  promoter_holding: String
+  debt_to_equity: String
+  net_profit_latest_quarter: String
+  yoy_quarterly_profit_growth: String
+  sales_latest_quarter: String
+  yoy_quarterly_sales_growth: String
+  roce3yr_avg: String
+  return_on_capital_employed: String
+  opm: String
+  profit_after_tax: String
+  sales: String
+  sales_growth_3years: String
+  sales_growth_5years: String
+  profit_growth: String
+  profit_growth_3years: String
+  profit_growth_5years: String
+  profit_growth_7years: String
+  profit_growth_10years: String
+  average_return_on_equity_5years: String
+  average_return_on_equity_3years: String
+  return_on_equity: String
+  return_over_1year: String
+  return_over_3years: String
+  return_over_5years: String
+  return_on_assets: String
+  sales_growth: String
+  sales_preceding_year: String
+  sales_growth_7years: String
+  operating_profit_preceding_year: String
+  net_profit_last_year: String
+  sales_growth_10years: String
+  average_earnings_5year: String
+  free_cash_flow_last_year: String
+  free_cash_flow_preceding_year: String
+  net_cash_flow_preceding_year: String
+  free_acash_flow_3years: String
+  average_return_on_capital_employed_3years: String
+  average_return_on_capital_employed_5years: String
+  dividend_yield: String
+  operating_cash_flow_3years: String
+  operating_cash_flow_5years: String
+  operating_cash_flow_7years: String
+  price_to_book_value: String
+  return_over_6months: String
+  StockBucketStockUniverses: [StockBucketStockUniverse] @hasMany(indexName: "byStockUniverse", fields: ["id"])
+}
+
+type StockBucket @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  description: String
+  StockBucketStockUniverses: [StockBucketStockUniverse] @hasMany(indexName: "byStockBucket", fields: ["id"])
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  email: String
+  password: String
+  mobile: Int
+  age: Int
+  profile_pic: String
+}
+ 
